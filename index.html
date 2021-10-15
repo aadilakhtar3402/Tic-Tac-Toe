@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="p5.js"></script>
+    <script src="p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+
+</head>
+
+<body>
+    <div id="header">
+        <h1>Tic-Tac-Toe</h1>
+    </div>
+    <div id="selections">
+        <form>
+            <label for="players">Choose Player:</label>
+            <select name="player" id="player">
+            <option value="player1">Player 1</option>
+            <option value="player2">Player 2</option>
+          </select>
+            <br><br>
+            <label for="levels">Choose Difficulty Level:</label>
+            <select name="level" id="level">
+            <option value="hard">Hard</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            
+          </select>
+            <br><br>
+        </form>
+    </div>
+
+
+    <form id="myForm">
+        <button type="button" onclick="resetboard()">New Game</button>
+        <br><br>
+        <script>
+            selectElement = document.querySelector('#level');
+            var lvl = selectElement.value;
+            selectElement1 = document.querySelector('#player');
+            var ply = selectElement1.value;
+        </script>
+        <script>
+            let winp;
+            if (lvl == "easy") {
+                winp = 0.5;
+            } else if (lvl == "medium") {
+                winp = 0.75;
+            } else {
+                winp = 1;
+            }
+        </script>
+        <script src="minimax.js">
+        </script>
+        <script src="sketch.js">
+        </script>
+    </form>
+
+    <script>
+        function resetboard() {
+            loop();
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    board[i][j] = '';
+                }
+            }
+            selectElement = document.querySelector('#level');
+            var lvl = selectElement.value;
+            selectElement1 = document.querySelector('#player');
+            var ply = selectElement1.value;
+            if (lvl == "easy") {
+                winp = 0.5;
+            } else if (lvl == "medium") {
+                winp = 0.75;
+            } else {
+                winp = 1;
+            }
+            if (ply == 'player2') {
+                human = 'O';
+                ai = 'X';
+                points = {
+                    'X': -500,
+                    'O': 500,
+                    'draw': 0
+                };
+                currentplayer = ai;
+                bestmove();
+            } else {
+                human = 'X';
+                ai = 'O';
+                points = {
+                    'X': 500,
+                    'O': -500,
+                    'draw': 0
+                };
+                currentplayer = human;
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>
